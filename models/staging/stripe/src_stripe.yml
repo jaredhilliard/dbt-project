@@ -6,6 +6,7 @@ sources:
     schema: stripe
     tables:
       - name: payment
+        description: the raw payment data
         columns:
           - name: id
             tests:
@@ -15,10 +16,12 @@ sources:
             tests:
               - not_null
           - name: paymentmethod
+            description: '{{ doc("paymentmethod")}}'
             tests:
               - accepted_values:
                   values: ['credit_card','coupon','bank_transfer','gift_card']
           - name: status
+            description: '{{ doc("status") }}'
             tests:
               - accepted_values:
                   values: ['success', 'fail']

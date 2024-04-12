@@ -2,18 +2,23 @@ version: 2
 
 sources:
   - name: jaffle_shop
+    description: a clone of a Postgress application database
     database: load  
     schema: jaffle_shop  #dbt will use the 'name' as the schema if schema is not specified.
     tables:
       - name: orders
+        description: the raw orders data
         columns:
           - name: id
+            description: the primary key for the raw orders data
             tests:
               - unique              
               - not_null
       - name: customers
+        description: the raw customers data
         columns: 
           - name: id
+            description: the primary key for the raw customers data
             tests:
               - unique
               - not_null
