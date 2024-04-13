@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: a clone of a Postgress application database
+    database: load  
+    schema: jaffle_shop  #dbt will use the 'name' as the schema if schema is not specified.
+    tables:
+      - name: orders
+        description: the raw orders data
+        columns:
+          - name: id
+            description: the primary key for the raw orders data
+            tests:
+              - unique              
+              - not_null
+      - name: customers
+        description: the raw customers data
+        columns: 
+          - name: id
+            description: the primary key for the raw customers data
+            tests:
+              - unique
+              - not_null
+      # if the source has a timestamp for when each row is loaded into the database
+      # you can add a freshness warning and/or error to make sure the sources are updating as expected.
+      # it will compare the current_timestamp at run time to the max(_etl_loaded_at) timestamp
+      # for market data, how does this handle weekends?  can you make cases or something?
+      #
+      # example of dynamic freshness here: https://github.com/dbt-labs/dbt-core/issues/4364
+      #
+      #  loaded_at_field: _etl_loaded_at
+      #   freshness:
+      #     warn_after: {count: 12, period: hour}
+      #     error_after: {count: 24, period: hour}
