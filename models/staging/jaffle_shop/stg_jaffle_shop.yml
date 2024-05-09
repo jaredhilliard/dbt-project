@@ -33,3 +33,5 @@ models:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+  - name: stg_jaffle_shop_customers
+  - name: stg_jaffle_shop_orders
